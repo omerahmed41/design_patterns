@@ -36,5 +36,5 @@ if __name__ == '__main__':
     # medChair = chairFactory.get_chair('med')
 
 
-    print(bigChair.__class__,bigChair.get_dimenations())
-    print(smallTable.__class__,smallTable.get_dimenations())
+    print(bigChair.__class__, bigChair.get_dimensions())
+    print(smallTable.__class__, smallTable.get_dimensions())

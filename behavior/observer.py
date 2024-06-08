@@ -4,21 +4,21 @@ from abc import ABCMeta, abstractstaticmethod
 class IObserver(metaclass=ABCMeta):
 
     @abstractstaticmethod
-    def notfiy(self, *args, **kwargs):
+    def notify(self, *args, **kwargs):
         ''''''
     
 class IObserverable(metaclass=ABCMeta):
 
     @abstractstaticmethod
-    def notfiy(self, *args, **kwargs):
+    def notify(self, *args, **kwargs):
         ''''''
 
     @abstractstaticmethod
-    def subscribe():
+    def subscribe(observer):
         ''''''
 
     @abstractstaticmethod
-    def un_subscribe():
+    def un_subscribe(observer):
         ''''''
 
 class Subject(IObserverable):
@@ -34,9 +34,9 @@ class Subject(IObserverable):
         print('new un_subscribe', len(self.observers))
         self.observers.remove(observer)
 
-    def notfiy(self, *args, **kwargs):
+    def notify(self, *args, **kwargs):
         for observer in self.observers:
-            observer.notfiy( *args, **kwargs)
+            observer.notify(*args, **kwargs)
 
 
 class Observer(IObserver):
@@ -44,7 +44,7 @@ class Observer(IObserver):
     def __init__(self, subject:IObserverable) -> None:
         subject.subscribe(self)
 
-    def notfiy(self, *args, **kwargs):
+    def notify(self, *args, **kwargs):
         print(f'message recived:', args)
 
 if __name__ == "__main__":
@@ -53,4 +53,4 @@ if __name__ == "__main__":
     observer2 = Observer(subject)
 
 
-    subject.notfiy("I'm happy and I know it ")
+    subject.notify("I'm happy and I know it ")
